@@ -38,7 +38,7 @@ namespace GenericsDemo
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(list1), list1.CountOdd() /*CountOdd(list1)*/));
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(list2), CountOdd(list2)));
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(set1), CountOdd(set1)));
-            Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(array1), CountOdd(array1)));
+            Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(array1), array1.Where(e => e % 2 != 0).Count() /*CountOdd(array1)*/));
 
             Console.ReadLine();
 
