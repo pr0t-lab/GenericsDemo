@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericsDemo
 {
@@ -40,8 +38,18 @@ namespace GenericsDemo
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(set1), CountOdd(set1)));
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(array1), array1.Where(e => e % 2 != 0).Count() /*CountOdd(array1)*/));
 
-            Console.ReadLine();
+            // var ec = new EnumerableCompositor<int>(new IEnumerable<int>[] { list1, list2, set1, array1 });
+            var ec = new EnumerableCompositor<int> { list1, list2, set1, array1 }; // COLLECTION INITIALIZATION LIST
+            int numOdd = 0;
+            foreach(var value in ec)
+            {
+                if(IsOdd(value))
+                {
+                    numOdd++;
+                }
+            }
 
+            Console.ReadLine();
         }
     }
 }
