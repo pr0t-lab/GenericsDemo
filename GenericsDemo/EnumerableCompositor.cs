@@ -4,6 +4,14 @@ using System.Linq;
 
 namespace GenericsDemo
 {
+    static class EnumerableCompositor
+    {
+        public static EnumerableCompositor<T> EC<T>(params IEnumerable<T>[] collections)
+        {
+            return new EnumerableCompositor<T>(collections);
+        }
+    }
+
     class EnumerableCompositor<T> : IEnumerable<T>
     {
         private List<IEnumerable<T>> _collections;
@@ -39,6 +47,18 @@ namespace GenericsDemo
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public TCollection To<TCollection>() where TCollection : ICollection<T>, new()
+        {
+            var collection = new TCollection();
+
+            foreach(var item in this)
+            {
+                collection.Add(item);
+            }
+
+            return collection;
         }
     } // end of EnumerableCompositor class
 }

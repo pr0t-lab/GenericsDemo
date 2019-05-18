@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static GenericsDemo.EnumerableCompositor;
 
 namespace GenericsDemo
 {
@@ -39,7 +40,10 @@ namespace GenericsDemo
             Console.WriteLine(string.Format("Number of odds in {0}: {1}", nameof(array1), array1.Where(e => e % 2 != 0).Count() /*CountOdd(array1)*/));
 
             // var ec = new EnumerableCompositor<int>(new IEnumerable<int>[] { list1, list2, set1, array1 });
-            var ec = new EnumerableCompositor<int> { list1, list2, set1, array1 }; // COLLECTION INITIALIZATION LIST
+            // var ec = new EnumerableCompositor<int> { list1, list2, set1, array1 }; // COLLECTION INITIALIZATION LIST
+            // var ec = EnumerableCompositor.Create(new IEnumerable<int>[] { list1, list2, set1, array1 });
+            // var ec = EnumerableCompositor.Create(list1, list2, set1, array1);   // params
+            var ec = EC(list1, list2, set1, array1);   // using static GenericsDemo.EnumerableCompositor;
             int numOdd = 0;
             foreach(var value in ec)
             {
@@ -48,6 +52,15 @@ namespace GenericsDemo
                     numOdd++;
                 }
             }
+
+            //IEnumerable<int> firstThree = Utils.Take<int>(list1, 3);
+            //foreach(var item in firstThree)
+            //{
+
+            //}
+
+            // Console.WriteLine(string.Format("The number of elements in the ec collection that are odd equlas {0}", ec.Count(x => IsOdd(x))));
+            HashSet<int> set = ec.To<HashSet<int>>();
 
             Console.ReadLine();
         }
